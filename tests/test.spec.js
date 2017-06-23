@@ -1,23 +1,23 @@
 var code = {
-  suma: function(a , b ) {
+  add: function(a , b ) {
       return new Promise( function( resolve, reject ) {
           // .....
-          code.otraFunction( a );
+          code.anotherFunction( a );
           resolve( a + b );
       }) ;
   }
   ,
-  otraFunction: () => {}
+  anotherFunction: () => {}
 };
 
 
 
 describe( "Tests", function() {
 
-    it( "test 01", function( done ) {
-        var spy = spyOn( code, "suma" ).and.callThrough();
+    it( "...test 01", function( done ) {
+        var spy = spyOn( code, "add" ).and.callThrough();
 
-        var result = code.suma( 2, 3 );
+        var result = code.add( 2, 3 );
         
         expect( result ).toEqual( jasmine.any( Promise ) );
         expect( result instanceof Promise ).toBe( true );
