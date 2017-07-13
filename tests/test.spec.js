@@ -1,6 +1,6 @@
 const code = {
-    add: function ( a, b ) {
-        return new Promise( function ( resolve, reject ) {
+    add: ( a, b ) => {
+        return new Promise( ( resolve, reject ) => {
             // .....
             code.anotherFunction( a );
             resolve( a + b );
@@ -10,23 +10,21 @@ const code = {
     }
 };
 
+describe( "Tests", () => {
 
-describe( "Tests", function () {
-
-    it( "...test 01", function ( done ) {
+    it( "...test 01", ( done ) => {
         const spy = spyOn( code, "add" ).and.callThrough();
 
-        const result = code.add( 2, 3 );
+        const promise = code.add( 2, 3 );
 
-        expect( result ).toEqual( jasmine.any( Promise ) );
-        expect( result instanceof Promise ).toBe( true );
+        expect( promise ).toEqual( jasmine.any( Promise ) );
+        expect( promise instanceof Promise ).toBe( true );
 
-        result.then( function ( res ) {
+        promise.then( ( addResult ) => {
             expect( spy ).toHaveBeenCalled();
-            expect( res ).toBe( 5 );
+            expect( addResult ).toBe( 5 );
+
             done();
-        }, function ( error ) {
-            done.fail( error );
         } ).catch( done.fail );
     } );
 
