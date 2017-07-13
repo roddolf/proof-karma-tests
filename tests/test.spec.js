@@ -1,32 +1,31 @@
-var code = {
-  add: function(a , b ) {
-      return new Promise( function( resolve, reject ) {
-          // .....
-          code.anotherFunction( a );
-          resolve( a + b );
-      }) ;
-  }
-  ,
-  anotherFunction: () => {}
+const code = {
+    add: function ( a, b ) {
+        return new Promise( function ( resolve, reject ) {
+            // .....
+            code.anotherFunction( a );
+            resolve( a + b );
+        } );
+    },
+    anotherFunction: () => {
+    }
 };
 
 
+describe( "Tests", function () {
 
-describe( "Tests", function() {
+    it( "...test 01", function ( done ) {
+        const spy = spyOn( code, "add" ).and.callThrough();
 
-    it( "...test 01", function( done ) {
-        var spy = spyOn( code, "add" ).and.callThrough();
+        const result = code.add( 2, 3 );
 
-        var result = code.add( 2, 3 );
-        
         expect( result ).toEqual( jasmine.any( Promise ) );
         expect( result instanceof Promise ).toBe( true );
 
-        result.then( function( res ) {
+        result.then( function ( res ) {
             expect( spy ).toHaveBeenCalled();
             expect( res ).toBe( 5 );
             done();
-        }, function( error ) {
+        }, function ( error ) {
             done.fail( error );
         } ).catch( done.fail );
     } );
